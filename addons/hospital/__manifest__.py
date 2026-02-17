@@ -6,7 +6,7 @@
     'name': "Hospital",
 
     'summary': """
-        Manage your patients.""",
+        777777777777777 your patients.""",
 
     'description': """
         This module allows you to manage your patients, etc.
