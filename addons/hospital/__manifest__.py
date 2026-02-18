@@ -6,7 +6,7 @@
     'name': "Hospital",
 
     'summary': """
-        777777777777777 your patients.""",
+        Manage your patients.""",
 
     'description': """
         This module allows you to manage your patients, etc.
@@ -17,7 +17,12 @@
 
     'version': '1.4',
 
+    'data': [
+      'views/menu.xml',
+    ],
+
     'installable': True,
     'application': True,
     'auto_install': False,
+    'license': 'LGPL-3',
 }

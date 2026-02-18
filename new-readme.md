@@ -24,3 +24,9 @@ THEN EXITS immediately
 --------------------------------------------------------
 
 
+Use the following command:
+```bash
+docker compose down --volumes --remove-orphans
+```
+
+It deletes containers, networks, volumes, etc...
