@@ -8,8 +8,8 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data
@@ -23,7 +23,7 @@ services:
           cpus: "0.25"
           memory: 512M
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: [ "CMD-SHELL", "pg_isready -U admin" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -33,6 +33,7 @@ services:
   odoo:
     image: odoo:17
     container_name: odoo
+    tty: true
     depends_on:
       - db
     ports:
@@ -47,16 +48,10 @@ services:
         target: /mnt/extra-addons
     environment:
       - HOST=db
-      - USER=postgres
-      - PASSWORD=postgres
-    deploy:
-      resources:
-        limits:
-          cpus: "0.50"
-          memory: 2048M
-        reservations:
-          cpus: "0.25"
-          memory: 512M
+      - USER=admin
+      - PASSWORD=admin
+    networks:
+      - postgres_network
 
   pgadmin:
     image: dpage/pgadmin4:latest
