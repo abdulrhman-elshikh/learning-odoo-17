@@ -31,7 +31,7 @@ services:
       - postgres_network
 
   odoo:
-    image: odoo:17
+    build: ./config/.
     container_name: odoo
     tty: true
     depends_on:
