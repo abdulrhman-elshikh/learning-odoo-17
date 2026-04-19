@@ -52,6 +52,19 @@ services:
       - PASSWORD=admin
     networks:
       - postgres_network
+      - mynet
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    depends_on:
+      - odoo
+    command: http odoo:8069
+    environment:
+      NGROK_AUTHTOKEN: <YOUR_TOKEN>
+    ports:
+      - "4040:4040"  # ngrok web UI
+    networks:
+      - mynet
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -79,6 +92,8 @@ volumes:
   pgadmin_data:
 
 networks:
+  mynet:
   postgres_network:
     driver: bridge
+
 
