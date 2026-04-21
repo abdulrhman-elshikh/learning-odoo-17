@@ -35,14 +35,17 @@ services:
     container_name: odoo
     tty: true
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8069:8069"
     restart: always
-    command: "-d learning_db"
+    command: "-d database"
+    entrypoint: ["/wait.sh"]
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./config:/etc/odoo
+      - ./wait.sh:/wait.sh
       - type: bind
         source: ./addons
         target: /mnt/extra-addons
@@ -60,7 +63,7 @@ services:
       - odoo
     command: http odoo:8069
     environment:
-      NGROK_AUTHTOKEN: <YOUR_TOKEN>
+      NGROK_AUTHTOKEN: 2VOdFL4qXiy7ccsf1Zh5qnzddK8_7hc8WpvbquyPJgXGxbAYy
     ports:
       - "4040:4040"  # ngrok web UI
     networks:
